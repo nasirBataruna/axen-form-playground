@@ -10,7 +10,7 @@ Built with React 19, TypeScript, and Vite — runs instantly in StackBlitz with 
 - React 19
 - TypeScript
 - Vite
-- `@axenstudio/axen-form@^0.1.16`
+- `@axenstudio/axen-form@0.1.18`
 - `yup` and `zod` (validation examples)
 - `react-router-dom` (scenario routing)
 
