@@ -1,0 +1,28 @@
+name: Playground validation
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-semantics:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.11.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.16.0'
+          cache: pnpm
+      - name: Frozen public dependency install
+        run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: TypeScript and Vite build
+        run: pnpm build
+      - name: Published package and dynamic postal semantic smoke
+        run: node --experimental-strip-types tools/validation/semantic-smoke.mjs
