@@ -4,7 +4,7 @@
  * - useFormContext hook for accessing form state in child components
  * - Read values, errors, dirty, isSubmitting from context
  */
-import { AxenForm, AxenFormRef, defaultComponentMap, FieldConfig, useFormContext } from '@axenstudio/axen-form'
+import { AxenForm, AxenFormRef, defaultComponentMap, FieldConfig, useFormContext, useFormState } from '@axenstudio/axen-form'
 import { useRef, useState } from 'react'
 import ScenarioLayout from '../../components/ScenarioLayout'
 
@@ -33,8 +33,7 @@ const initialValues = {
  * Must be rendered inside AxenForm's children slot.
  */
 function FormStateViewer() {
-  const { store } = useFormContext()
-  const state = store.getState()
+  const state = useFormState()
 
   return (
     <div style={{
@@ -44,7 +43,7 @@ function FormStateViewer() {
       borderRadius: 8,
       background: '#f8f9fa',
     }}>
-      <h4 style={{ marginBottom: 8 }}>Live Form State (via useFormContext)</h4>
+      <h4 style={{ marginBottom: 8 }}>Live Form State (reactive useFormState)</h4>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, fontSize: '0.9em' }}>
         <div>
           <strong>dirty:</strong> {String(state.dirty)}
@@ -56,7 +55,7 @@ function FormStateViewer() {
           <strong>submitCount:</strong> {state.submitCount}
         </div>
         <div>
-          <strong>isValid:</strong> {String(Object.keys(state.errors).length === 0)}
+          <strong>current errors:</strong> {Object.keys(state.errors).length}
         </div>
       </div>
       <details style={{ marginTop: 8 }}>
@@ -108,8 +107,7 @@ function QuickFill() {
 
 const SOURCE_CODE = `// useFormContext — access form state in child components
 function FormStateViewer() {
-  const { store } = useFormContext()
-  const state = store.getState()
+  const state = useFormState()
 
   return (
     <div>
@@ -148,12 +146,13 @@ export default function S09FormContext() {
   return (
     <ScenarioLayout
       title="Form Context"
-      description="Child components access form state via useFormContext hook."
+      description="Child components read reactive state with useFormState and update values via context."
       result={result}
       sourceCode={SOURCE_CODE}
     >
       <AxenForm
         ref={formRef}
+        validationPolicy={{ mode: 'standard' }}
         config={{ fields, initialValues }}
         components={defaultComponentMap}
         onSubmit={(values) => setResult(values)}
