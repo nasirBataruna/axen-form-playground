@@ -24,7 +24,7 @@ const fields: (FieldConfig | FieldGroupConfig)[] = [
       { name: 'firstName', label: 'First Name', type: 'text', required: true, colSpan: 6 },
       { name: 'lastName', label: 'Last Name', type: 'text', required: true, colSpan: 6 },
       { name: 'email', label: 'Email', type: 'email', required: true, colSpan: 6 },
-      { name: 'phone', label: 'Phone', type: 'phone', rules: { format: 'phone', region: 'ID' }, colSpan: 6 },
+      { name: 'phone', label: 'Phone', type: 'phone', colSpan: 6 },
       { name: 'birthDate', label: 'Birth Date', type: 'date', colSpan: 6 },
       { name: 'gender', label: 'Gender', type: 'select', options: [
         { value: 'male', label: 'Male' },
