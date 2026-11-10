@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "required_profiles": [
+    "playground-build"
+  ],
+  "profiles": {
+    "playground-build": {
+      "kind": "test",
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/native-validation",
+        "-p",
+        "test_build.py",
+        "-v"
+      ],
+      "cwd": ".",
+      "timeout_seconds": 120,
+      "max_output_bytes": 65536,
+      "required": true
+    }
+  }
+}
