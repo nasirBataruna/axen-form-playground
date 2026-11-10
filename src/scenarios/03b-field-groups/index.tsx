@@ -8,6 +8,7 @@
 import { AxenForm, AxenFormRef, defaultComponentMap, FieldConfig, FieldGroupConfig } from '@axenstudio/axen-form'
 import { useRef, useState } from 'react'
 import ScenarioLayout from '../../components/ScenarioLayout'
+import { countryAwareValidationAdapter } from '../shared/countryAwareValidation'
 
 const fields: (FieldConfig | FieldGroupConfig)[] = [
   // --- Standalone field before any group ---
@@ -23,7 +24,7 @@ const fields: (FieldConfig | FieldGroupConfig)[] = [
       { name: 'firstName', label: 'First Name', type: 'text', required: true, colSpan: 6 },
       { name: 'lastName', label: 'Last Name', type: 'text', required: true, colSpan: 6 },
       { name: 'email', label: 'Email', type: 'email', required: true, colSpan: 6 },
-      { name: 'phone', label: 'Phone', type: 'phone', colSpan: 6 },
+      { name: 'phone', label: 'Phone', type: 'phone', rules: { format: 'phone', region: 'ID' }, colSpan: 6 },
       { name: 'birthDate', label: 'Birth Date', type: 'date', colSpan: 6 },
       { name: 'gender', label: 'Gender', type: 'select', options: [
         { value: 'male', label: 'Male' },
@@ -139,6 +140,8 @@ export default function S12FieldGroups() {
     >
       <AxenForm
         ref={formRef}
+        validationPolicy={{ mode: 'standard' }}
+        validationAdapter={countryAwareValidationAdapter}
         config={{ fields, initialValues }}
         components={defaultComponentMap}
         onSubmit={(values) => setResult(values)}
