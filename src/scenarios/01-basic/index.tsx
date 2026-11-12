@@ -77,6 +77,7 @@ export default function S01Basic() {
     >
       <AxenForm
         ref={formRef}
+        validationPolicy={{ mode: 'standard' }}
         config={{ fields, initialValues }}
         components={defaultComponentMap}
         onSubmit={(values) => setResult(values)}

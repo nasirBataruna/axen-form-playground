@@ -10,6 +10,7 @@
 import { AxenForm, AxenFormRef, defaultComponentMap, FieldConfig } from '@axenstudio/axen-form'
 import { useMemo, useRef, useState } from 'react'
 import ScenarioLayout from '../../components/ScenarioLayout'
+import { countryAwareValidationAdapter } from '../shared/countryAwareValidation'
 
 interface StepDef {
   id: string
@@ -313,6 +314,8 @@ export default function S14StepperComplex() {
           </div>
 
           <AxenForm
+            validationPolicy={{ mode: 'standard' }}
+            validationAdapter={countryAwareValidationAdapter}
             key={`${currentStepDef.id}-${safeStep}`}
             ref={formRef}
             config={{ fields: currentStepDef.fields, initialValues: formValues }}

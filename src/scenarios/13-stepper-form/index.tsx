@@ -30,7 +30,7 @@ const steps: Step[] = [
     fields: [
       { name: 'street', label: 'Street Address', type: 'text', required: true, colSpan: 12 },
       { name: 'city', label: 'City', type: 'text', required: true, colSpan: 6 },
-      { name: 'zipCode', label: 'Zip Code', type: 'text', required: true, colSpan: 6 },
+      { name: 'zipCode', label: 'ZIP Code (Indonesia)', type: 'text', required: true, rules: { format: 'postalCode', country: 'ID' }, colSpan: 6 }
     ],
   },
   {
@@ -85,7 +85,7 @@ const steps: Step[] = [
     fields: [
       { name: 'street', label: 'Street Address', type: 'text', required: true, colSpan: 12 },
       { name: 'city', label: 'City', type: 'text', required: true, colSpan: 6 },
-      { name: 'zipCode', label: 'Zip Code', type: 'text', required: true, colSpan: 6 },
+      { name: 'zipCode', label: 'ZIP Code (Indonesia)', type: 'text', required: true, rules: { format: 'postalCode', country: 'ID' }, colSpan: 6 }
     ],
   },
   {
@@ -180,6 +180,7 @@ export default function S13StepperForm() {
         key={currentStep}
         ref={formRef}
         config={{ fields: steps[currentStep].fields, initialValues: formValues }}
+        validationPolicy={{ mode: 'standard' }}
         components={defaultComponentMap}
         onSubmit={handleSubmit}
         gap="12px"

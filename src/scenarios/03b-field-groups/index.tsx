@@ -8,6 +8,7 @@
 import { AxenForm, AxenFormRef, defaultComponentMap, FieldConfig, FieldGroupConfig } from '@axenstudio/axen-form'
 import { useRef, useState } from 'react'
 import ScenarioLayout from '../../components/ScenarioLayout'
+import { countryAwareValidationAdapter } from '../shared/countryAwareValidation'
 
 const fields: (FieldConfig | FieldGroupConfig)[] = [
   // --- Standalone field before any group ---
@@ -139,6 +140,8 @@ export default function S12FieldGroups() {
     >
       <AxenForm
         ref={formRef}
+        validationPolicy={{ mode: 'standard' }}
+        validationAdapter={countryAwareValidationAdapter}
         config={{ fields, initialValues }}
         components={defaultComponentMap}
         onSubmit={(values) => setResult(values)}
