@@ -34,7 +34,7 @@ const fields: FieldConfig[] = [
   { name: 'text', label: 'Text', type: 'text', colSpan: 6 },
   { name: 'email', label: 'Email', type: 'email', colSpan: 6 },
   { name: 'password', label: 'Password', type: 'password', colSpan: 6 },
-  { name: 'phone', label: 'Phone', type: 'phone', colSpan: 6 },
+  { name: 'phone', label: 'Phone', type: 'phone', rules: { format: 'phone', region: 'ID' }, colSpan: 6 },
   { name: 'textarea', label: 'Textarea', type: 'textarea', rows: 2, colSpan: 12 },
 
   // Numeric
@@ -108,7 +108,7 @@ const fields: FieldConfig[] = [
   { name: 'text', label: 'Text', type: 'text', colSpan: 6 },
   { name: 'email', label: 'Email', type: 'email', colSpan: 6 },
   { name: 'password', label: 'Password', type: 'password', colSpan: 6 },
-  { name: 'phone', label: 'Phone', type: 'phone', colSpan: 6 },
+  { name: 'phone', label: 'Phone', type: 'phone', rules: { format: 'phone', region: 'ID' }, colSpan: 6 },
   { name: 'textarea', label: 'Textarea', type: 'textarea', rows: 2 },
   { name: 'number', label: 'Number', type: 'number', min: 0, max: 100 },
   { name: 'currency', label: 'Currency', type: 'currency', currency: 'IDR', locale: 'id-ID' },
@@ -139,6 +139,7 @@ export default function S02AllFields() {
     >
       <AxenForm
         ref={formRef}
+        validationPolicy={{ mode: 'standard' }}
         config={{ fields, initialValues }}
         components={defaultComponentMap}
         onSubmit={(values) => setResult(values)}

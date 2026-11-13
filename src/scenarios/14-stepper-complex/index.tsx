@@ -64,7 +64,7 @@ const ALL_STEPS: StepDef[] = [
       { name: 'street', label: 'Street', type: 'text', required: true, colSpan: 12 },
       { name: 'city', label: 'City', type: 'text', required: true, colSpan: 4 },
       { name: 'state', label: 'State / Province', type: 'text', colSpan: 4 },
-      { name: 'zipCode', label: 'Zip Code', type: 'text', required: true, colSpan: 4 },
+      { name: 'zipCode', label: 'Zip Code', type: 'text', required: true, rules: { format: 'postalCode', countryField: 'country' }, colSpan: 4 },
       { name: 'country', label: 'Country', type: 'select', required: true, options: [
         { value: 'ID', label: 'Indonesia' },
         { value: 'US', label: 'United States' },
@@ -313,6 +313,7 @@ export default function S14StepperComplex() {
           </div>
 
           <AxenForm
+            validationPolicy={{ mode: 'standard', unknownCountry: 'ignore' }}
             key={`${currentStepDef.id}-${safeStep}`}
             ref={formRef}
             config={{ fields: currentStepDef.fields, initialValues: formValues }}

@@ -40,7 +40,7 @@ const fields: (FieldConfig | FieldGroupConfig)[] = [
       { name: 'street', label: 'Street', type: 'text', colSpan: 12 },
       { name: 'city', label: 'City', type: 'text', colSpan: 4 },
       { name: 'state', label: 'State', type: 'text', colSpan: 4 },
-      { name: 'zipCode', label: 'Zip Code', type: 'text', colSpan: 4 },
+      { name: 'zipCode', label: 'Zip Code', type: 'text', rules: { format: 'postalCode', countryField: 'country' }, colSpan: 4 },
       { name: 'country', label: 'Country', type: 'select', options: [
         { value: 'us', label: 'United States' },
         { value: 'uk', label: 'United Kingdom' },
@@ -103,7 +103,7 @@ const fields: (FieldConfig | FieldGroupConfig)[] = [
       { name: 'street', type: 'text', colSpan: 12 },
       { name: 'city', type: 'text', colSpan: 4 },
       { name: 'state', type: 'text', colSpan: 4 },
-      { name: 'zipCode', type: 'text', colSpan: 4 },
+      { name: 'zipCode', type: 'text', rules: { format: 'postalCode', countryField: 'country' }, colSpan: 4 },
     ],
   },
 
@@ -139,6 +139,7 @@ export default function S12FieldGroups() {
     >
       <AxenForm
         ref={formRef}
+        validationPolicy={{ mode: 'standard' }}
         config={{ fields, initialValues }}
         components={defaultComponentMap}
         onSubmit={(values) => setResult(values)}

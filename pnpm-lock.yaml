@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@axenstudio/axen-form':
-        specifier: 0.1.18
-        version: 0.1.18(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(yup@1.7.1)(zod@3.25.76)
+        specifier: 0.1.19
+        version: 0.1.19(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(yup@1.7.1)(zod@3.25.76)
       react:
         specifier: ^19.2.4
         version: 19.2.4
@@ -45,8 +45,8 @@ importers:
 
 packages:
 
-  '@axenstudio/axen-form@0.1.18':
-    resolution: {integrity: sha512-CoMxXVW55eXnOWIFICM4ExVOgcxzG55vMLYAkpUpQkA9mV+lS3RNvHUbACHvKlsR57M3Ybtbctaqpq5ZdtQm+Q==}
+  '@axenstudio/axen-form@0.1.19':
+    resolution: {integrity: sha512-b0AU6fs82Xm/dsiUG/6gnIZVt237VxtpWZderVyhOY7JvOSvnp+50hL0tGA5B3z2r597T6MptN2AFPz7cU2QrQ==}
     peerDependencies:
       react: '>=19.0.0'
       react-dom: '>=19.0.0'
@@ -704,7 +704,7 @@ packages:
 
 snapshots:
 
-  '@axenstudio/axen-form@0.1.18(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(yup@1.7.1)(zod@3.25.76)':
+  '@axenstudio/axen-form@0.1.19(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(yup@1.7.1)(zod@3.25.76)':
     dependencies:
       react: 19.2.4
       react-dom: 19.2.4(react@19.2.4)
