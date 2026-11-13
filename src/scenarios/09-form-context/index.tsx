@@ -2,7 +2,7 @@
  * Scenario 09 — Form Context
  *
  * - useFormContext hook for accessing form state in child components
- * - Read values, errors, dirty, isSubmitting from context
+ * - Read values, errors and unvalidated/validating/valid/invalid lifecycle with useFormState
  */
 import { AxenForm, AxenFormRef, defaultComponentMap, FieldConfig, useFormContext, useFormState } from '@axenstudio/axen-form'
 import { useRef, useState } from 'react'
@@ -57,6 +57,12 @@ function FormStateViewer() {
         <div>
           <strong>current errors:</strong> {Object.keys(state.errors).length}
         </div>
+        <div>
+          <strong>validationStatus:</strong> {state.validationStatus}
+        </div>
+        <div>
+          <strong>isValidating:</strong> {String(state.isValidating)}
+        </div>
       </div>
       <details style={{ marginTop: 8 }}>
         <summary style={{ cursor: 'pointer', fontWeight: 600 }}>Values</summary>
@@ -68,6 +74,12 @@ function FormStateViewer() {
         <summary style={{ cursor: 'pointer', fontWeight: 600 }}>Errors</summary>
         <pre style={{ fontSize: '0.85em', marginTop: 4 }}>
           {JSON.stringify(state.errors, null, 2)}
+        </pre>
+      </details>
+      <details style={{ marginTop: 4 }}>
+        <summary style={{ cursor: 'pointer', fontWeight: 600 }}>Field Validation Status</summary>
+        <pre style={{ fontSize: '0.85em', marginTop: 4 }}>
+          {JSON.stringify(state.fieldValidationStatus, null, 2)}
         </pre>
       </details>
       <details style={{ marginTop: 4 }}>
@@ -113,6 +125,8 @@ function FormStateViewer() {
     <div>
       <p>dirty: {String(state.dirty)}</p>
       <p>isSubmitting: {String(state.isSubmitting)}</p>
+      <p>validationStatus: {state.validationStatus}</p>
+      <pre>{JSON.stringify(state.fieldValidationStatus, null, 2)}</pre>
       <pre>{JSON.stringify(state.values, null, 2)}</pre>
     </div>
   )
@@ -146,7 +160,7 @@ export default function S09FormContext() {
   return (
     <ScenarioLayout
       title="Form Context"
-      description="Child components read reactive state with useFormState and update values via context."
+      description="Live validation status (unvalidated, validating, valid, invalid) and reactive field updates using useFormState."
       result={result}
       sourceCode={SOURCE_CODE}
     >
