@@ -20,6 +20,19 @@ jobs:
         with:
           node-version: '22.16.0'
           cache: pnpm
+      # Temporary release migration: generate npm 0.1.19 lock metadata in CI,
+      # then pin and revert this bootstrap step to a frozen install.
+      - name: Resolve npm 0.1.19 lockfile for migration
+        run: |
+          pnpm install --no-frozen-lockfile --ignore-scripts
+          echo '=== PUBLIC PUBLISHED PACKAGE SRI ==='
+          npm view @axenstudio/axen-form@0.1.19 dist.integrity --registry=https://registry.npmjs.org/
+          echo '=== IMPORTER ==='
+          sed -n '1,30p' pnpm-lock.yaml
+          echo '=== PACKAGE ENTRY ==='
+          grep -A9 -F "  '@axenstudio/axen-form@0.1.19':" pnpm-lock.yaml
+          echo '=== SNAPSHOT ENTRY ==='
+          grep -A7 -F "  '@axenstudio/axen-form@0.1.19(" pnpm-lock.yaml
       - name: Frozen public dependency install
         run: pnpm install --frozen-lockfile --ignore-scripts
       - name: TypeScript and Vite build
